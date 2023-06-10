@@ -6,7 +6,7 @@ function GetCityHtml(page) {
     myAxios({
         url: 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
     }).then(result => {
-        const CityObj = result.slice(1, 101);
+        const CityObj = result.slice(0, 100);
         for (let i = 0; i < CityObj.length; i++) {
             Myjson.push(result[i]);
         }
@@ -24,8 +24,9 @@ function GetCityHtml(page) {
             let regexp = new RegExp(e.target.value, "i")
             for (let i = 0; i < CityObj.length; i++) {
                 if (regexp.test(CityObj[i].city) || regexp.test(CityObj[i].state)) {
-                    console.log(CityObj[i].city, CityObj[i].state, CityObj[i]);
-                    Myjson.push(CityObj[i]);
+                    if(e.target.value != ''){
+                        Myjson.push(CityObj[i]);
+                    }
                 }
             }
             City_messageHTML(Myjson, page);
@@ -64,6 +65,15 @@ function City_messageHTML(data, page) {
             city_message_box.innerHTML += ciitydata;
         }
     }
+    // 判断是否有数据
+    if (data.length == 0) {
+        city_message_box.innerHTML = `
+            <div class="message_none">
+                <h1>暂无数据展示</h1>
+            </div>
+        `;
+    }
+
     //判断是否出现分页
     if (PageContent > 1) {
         pagination.innerHTML +=
@@ -100,8 +110,7 @@ function City_messageHTML(data, page) {
         }
     }
 }
-// 搜索菜单
-// 搜索菜单显示与隐藏
+
 let search_list = document.querySelector('.search_list');
 let search_city = document.querySelector('.search_city');
 // 绑定input事件，获取关键字
@@ -111,7 +120,13 @@ document.querySelector('.search_city').addEventListener('input', (e) => {
         url: 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json',
         city: e.target.value
     }).then(result => {
-        const CityObj = result.slice(1, 101);
+        const CityObj = result.slice(0, 100);
+        console.log(CityObj);
+        // 如果输入框的值为空，显示所有数据
+        if (e.target.value == '') {
+            Myjson = CityObj;
+            City_messageHTML(Myjson, page);
+        }
         const liStr = CityObj.map(item => {
             // 如果json数据中的城市中不包含输入的字符串，就返回-1，所以不返回-1就是在json数据中存在
             if (item.city.indexOf(e.target.value) != -1) {
@@ -121,8 +136,9 @@ document.querySelector('.search_city').addEventListener('input', (e) => {
         document.querySelector('.search_list').innerHTML = liStr;
     })
 })
+
 // 搜索列表的显示与隐藏
-document.querySelector('.search_city').addEventListener('click', e => {
+$(".select_box").mouseover(function () {
     search_list.style.display = 'block';
     $(".search_list").mouseleave(function () {
         search_list.style.display = 'none';
@@ -134,6 +150,7 @@ document.querySelector('.search_list').addEventListener('click', e => {
         // 只有点击了li才执行这段代码
         const cityName = e.target.dataset.city;
         Change_city(cityName);
+        $('.search_city').val(cityName);
     }
     search_list.style.display = 'none';
 })
@@ -142,7 +159,7 @@ function Change_city(cityName) {
         url: 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json',
         city: cityName
     }).then(result => {
-        const CityObj = result.slice(0, 101);
+        const CityObj = result.slice(0, 100);
         for (let i = 0; i < CityObj.length; i++) {
             if (CityObj[i].city == cityName) {
                 Myjson = [];

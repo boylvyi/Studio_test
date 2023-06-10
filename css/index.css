@@ -4,6 +4,11 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    height: 1013px;
+}
+
+.square,.circle{
+    overflow: hidden;
 }
 
 .square ul li,.circle ul li{
@@ -25,7 +30,7 @@ body{
 
 .square li:nth-child(2){
     top: 80vh;
-    left: 10vh;
+    left: 10vw;
     /* 设置动画延迟时间 */
     animation-delay: 2s;
 }
@@ -40,7 +45,7 @@ body{
 
 .square li:nth-child(4){
     top: 10vh;
-    left: 70vh;
+    left: 70vw;
     /* 设置动画延迟时间 */
     animation-delay: 6s;
 }
@@ -48,19 +53,19 @@ body{
 
 .square li:nth-child(5){
     top: 10vh;
-    left: 10vh;
+    left: 10vw;
     /* 设置动画延迟时间 */
     animation-delay: 8s;
 }
 
 .square li:nth-child(6){
     top: 160vh;
-    left: 10vh;
+    left: 10vw;
     /* 设置动画延迟时间 */
     animation-delay: 2s;
 }
 
-.square li:nth-child(7){
+.square li:nth-child(3){
     top: 160vh;
     left: 85vh;
     /* 设置动画延迟时间 */
@@ -68,17 +73,17 @@ body{
 }
 
 
-.square li:nth-child(8){
-    top: 90vh;
-    left: 70vh;
+.square li:nth-child(4){
+    top: 110vh;
+    left: 70vw;
     /* 设置动画延迟时间 */
     animation-delay: 6s;
 }
 
 
-.square li:nth-child(9){
-    top: 90vh;
-    left: 10vh;
+.square li:nth-child(5){
+    top: 110vh;
+    left: 10vw;
     /* 设置动画延迟时间 */
     animation-delay: 8s;
 }
@@ -91,56 +96,53 @@ body{
 }
 
 .circle li:nth-child(2){
-    left: 35vh;
+    left: 35vw;
     /* 设置动画延迟时间 */
-    animation-delay: 2s;
+    animation-delay: 1s;
 }
 
 .circle li:nth-child(3){
     left: 55vw;
     /* 设置动画延迟时间 */
-    animation-delay: 6s;
-}
-
-.circle li:nth-child(4){
-    left: 75vh;
-    /* 设置动画延迟时间 */
     animation-delay: 4s;
 }
 
-.circle li:nth-child(5){
-    left: 90vw;
+.circle li:nth-child(4){
+    left: 75vw;
     /* 设置动画延迟时间 */
-    animation-delay: 8s;
+    animation-delay: 2s;
+}
+
+.circle li:nth-child(5){
+    left: 65vw;
+    /* 设置动画延迟时间 */
+    animation-delay: 6s;
 }
 
 .circle li:nth-child(6){
-    top: 110vh;
-    left: 35vh;
+    left: 15vw;
     /* 设置动画延迟时间 */
     animation-delay: 2s;
 }
 
 .circle li:nth-child(7){
-    top: 130vh;
-    left: 55vw;
+    left: 70vw;
     /* 设置动画延迟时间 */
-    animation-delay: 6s;
+    animation-delay: 4.5s;
 }
 
 .circle li:nth-child(8){
-    top: 120vh;
-    left: 75vh;
+    left: 65vw;
     /* 设置动画延迟时间 */
-    animation-delay: 4s;
+    animation-delay: 3s;
 }
 
 .circle li:nth-child(9){
-    top: 120vh;
-    left: 90vw;
+    left: 80vw;
     /* 设置动画延迟时间 */
-    animation-delay: 8s;
+    animation-delay: 5s;
 }
+
 
 @keyframes square{
     0%{
@@ -157,7 +159,7 @@ body{
     0%{
         transform: scale(0) rotateY(0deg);
         opacity: 1;
-        bottom: 0;
+        bottom: -70vh;
         border-radius: 0;
     }
     100%{
@@ -210,9 +212,9 @@ body{
     list-style: none;
 }
 
-.search_list::-webkit-scrollbar{
+/* .search_list::-webkit-scrollbar{
     display: none;
-}
+} */
 
 .search_list li{
     padding: 3px;
@@ -232,12 +234,19 @@ body{
 }
 
 .search_list a:hover{
+    cursor: pointer;
     color: white;
 }
 
 .city_title img{
     padding-right: 5px;
     width: 35px;
+}
+
+.message_none{
+    width: 250px;
+    color: black;
+    margin: 50px auto;
 }
 
 .city_message{
